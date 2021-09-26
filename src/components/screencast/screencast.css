@@ -4,6 +4,10 @@
   image-rendering: pixelated; /* Disables interpolation. See https://stackoverflow.com/questions/7615009/disable-interpolation-when-scaling-a-canvas */
 }
 
+.screencast:focus-visible {
+  outline: none;
+}
+
 .img-hidden {
   display: none;
 }

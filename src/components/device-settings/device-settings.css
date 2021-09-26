@@ -1,6 +1,8 @@
 .device-settings {
   display: none;
-  border-top: 1px solid #d1d1d1;
+  margin-top: 5px;
+  padding: 0.4rem 0 0.2rem 0;
+  border-top: 1px solid var(--vscode-panel-border);
 }
 
 .device-settings.active {
@@ -8,8 +10,6 @@
 }
 
 select {
-  background: transparent;
-  border: none;
   font-size: 11px;
   height: 29px;
   padding: 5px; /* If you add too much padding here, the options won't show in IE */
@@ -18,18 +18,41 @@ select {
 .viewport-size-input {
   max-width: 45px;
   text-align: center;
-  background: #f0f0f0;
   box-shadow: none;
-  border: 1px solid transparent;
+  /*border: 1px solid transparent;*/
   outline: 0;
 }
 
-.viewport-size-input:active,
+/*.viewport-size-input:active,
 .viewport-size-input:focus {
   border: 1px solid #d3d3d3;
   background: #fff;
+}*/
+
+select,
+.viewport-size-input {
+  background: var(--vscode-editor-background);
+  color: var(--vscode-panelTitle-inactiveForeground);
+  filter: brightness(1.5);
+  border: 1px solid var(--vscode-panel-border);
+}
+
+select:focus,
+.viewport-size-input:focus {
+  outline: none;
+}
+
+select:focus-visible,
+.viewport-size-input:focus-visible {
+  /*outline: 1px solid var(--vscode-focusBorder);*/
+}
+
+.metadata {
+  position: relative;
+  top: 1px;
+  margin: 0 3rem;
 }
 
 .metadata .spacer {
-  padding: 0 2px;
+  padding: 0 6px;
 }

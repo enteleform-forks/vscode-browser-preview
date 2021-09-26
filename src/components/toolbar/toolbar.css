@@ -1,7 +1,7 @@
 .toolbar {
-  background: #f0f0f0;
+  background: var(--vscode-panel-background);
   padding: 4px 4px;
-  border-bottom: 1px solid #d1d1d1;
+  border-bottom: 1px solid var(--vscode-panel-border);
   box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
@@ -10,11 +10,16 @@
 }
 
 button {
+  --buttonSize: 29px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer !important;
   background: transparent;
   transition: background-color 0.2s ease-in-out;
   padding: 0 5px;
-  color: #626262;
+  color: var(--vscode-panelTitle-activeForeground);
   font-size: 21px;
   border-radius: 2px;
   border: 2px solid transparent;
@@ -22,28 +27,53 @@ button {
   background-size: 70%;
   background-position: 50% 50%;
   text-indent: -9000px;
-
   cursor: pointer;
-
-  height: 29px;
-  width: 29px;
-
+  width: var(--buttonSize);
+  height: var(--buttonSize);
   outline: 0;
 }
 
 button:not([disabled]):active:hover {
-  background-color: #d3d3d3;
+  filter: brightness(1.5);
+  backdrop-filter: brightness(2);
 }
 
 button:not([disabled]):hover,
 button:not([disabled]):active {
-  background-color: #ddd;
+  filter: brightness(1.3);
+  backdrop-filter: brightness(1.5);
 }
 
 button:disabled {
-  opacity: 0.1;
+  opacity: 0.5;
+  color: var(--vscode-panelTitle-inactiveForeground);
 }
 
-button.active {
-  background-color: #d5d5d5;
+button > svg {
+  --iconPadding: 7px;
+  --iconSize: calc(var(--buttonSize) - var(--iconPadding));
+
+  min-width: var(--iconSize);
+  max-height: var(--iconSize);
+  min-width: var(--iconSize);
+  max-height: var(--iconSize);
+}
+
+button.inspect > svg {
+  --iconPadding: 13px;
+}
+
+button.device > svg {
+  --iconPadding: 14px;
+}
+
+.toolbar .urlbar {
+  background: var(--vscode-editor-background);
+  border-color: var(--vscode-panel-border);
+  filter: brightness(1.5);
+}
+
+.toolbar .urlbar > input {
+  background: transparent;
+  color: var(--vscode-panelTitle-inactiveForeground);
 }

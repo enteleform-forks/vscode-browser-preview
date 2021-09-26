@@ -4,28 +4,6 @@ import './toolbar.css';
 import UrlInput from '../url-input/url-input';
 import DeviceSettings from '../device-settings/device-settings';
 
-const iconBackwardStyle = {
-  backgroundImage: `url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBkPSJNNDI3IDIzNC42MjVIMTY3LjI5NmwxMTkuNzAyLTExOS43MDJMMjU2IDg1IDg1IDI1NmwxNzEgMTcxIDI5LjkyMi0yOS45MjQtMTE4LjYyNi0xMTkuNzAxSDQyN3YtNDIuNzV6Ii8+PC9zdmc+)`
-};
-
-const iconForwardStyle = {
-  backgroundImage: `url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBkPSJNODUgMjc3LjM3NWgyNTkuNzA0TDIyNS4wMDIgMzk3LjA3NyAyNTYgNDI3bDE3MS0xNzFMMjU2IDg1bC0yOS45MjIgMjkuOTI0IDExOC42MjYgMTE5LjcwMUg4NXY0Mi43NXoiLz48L3N2Zz4=)`
-};
-
-const iconRefreshStyle = {
-  backgroundImage: `url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBkPSJNMjU2IDM4OGMtNzIuNTk3IDAtMTMyLTU5LjQwNS0xMzItMTMyIDAtNzIuNjAxIDU5LjQwMy0xMzIgMTMyLTEzMiAzNi4zIDAgNjkuMjk5IDE1LjQgOTIuNDA2IDM5LjYwMUwyNzggMjM0aDE1NFY4MGwtNTEuNjk4IDUxLjcwMkMzNDguNDA2IDk5Ljc5OCAzMDQuNDA2IDgwIDI1NiA4MGMtOTYuNzk3IDAtMTc2IDc5LjIwMy0xNzYgMTc2czc4LjA5NCAxNzYgMTc2IDE3NmM4MS4wNDUgMCAxNDguMjg3LTU0LjEzNCAxNjkuNDAxLTEyOEgzNzguODVjLTE4Ljc0NSA0OS41NjEtNjcuMTM4IDg0LTEyMi44NSA4NHoiLz48L3N2Zz4=)`
-};
-
-const iconInspectStyle = {
-  backgroundImage: `url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIxNjBweCIgaGVpZ2h0PSIxNjBweCIgdmlld0JveD0iMCAwIDE2MCAxNjAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+ICAgICAgICA8dGl0bGU+aW5zcGVjdDwvdGl0bGU+ICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPiAgICA8ZyBpZD0iUGFnZS0xIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4gICAgICAgIDxnIGlkPSJpbnNwZWN0IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjQuMDAwMDAwLCAtMjQuMDAwMDAwKSI+ICAgICAgICAgICAgPHBvbHlnb24gaWQ9InBhdGgzNDYiIG9wYWNpdHk9IjAuNSIgcG9pbnRzPSIwIDAgMTk2IDAgMTk2IDE5NiAwIDE5NiI+PC9wb2x5Z29uPiAgICAgICAgICAgIDxwYXRoIGQ9Ik03My41LDE3MS41IEw0Mi44NzUsMTcxLjUgQzMwLjYyNSwxNzEuNSAyNC41LDE2NS4zNzUgMjQuNSwxNTMuMTI1IEwyNC41LDQyLjg3NSBDMjQuNSwzMC42MjUgMzAuNjI1LDI0LjUgNDIuODc1LDI0LjUgTDE1My4xMjUsMjQuNSBDMTcxLjUsMjQuNSAxNzEuNSw0Mi40ODA1NSAxNzEuNSw0Mi44NzUgTDE3MS41LDczLjUgTDE1OS4yNSw3My41IEwxNTkuMjUsMzYuNzUgTDM2Ljc1LDM2Ljc1IEwzNi43NSwxNTkuMjUgTDczLjUsMTU5LjI1IEw3My41LDE3MS41IFogTTE4My43NSwxMTAuMjUgTDE0NywxMzQuNzUgTDE4My43NSwxNzEuNSBMMTcxLjUsMTgzLjc1IEwxMzQuNzUsMTQ3IEwxMTAuMjUsMTgzLjc1IEw4NS43NSw4NS43NSBMMTgzLjc1LDExMC4yNSBaIiBpZD0icGF0aDM0OCIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJub256ZXJvIj48L3BhdGg+ICAgICAgICA8L2c+ICAgIDwvZz48L3N2Zz4=)`,
-  backgroundSize: `12px 12px`
-};
-
-const iconDeviceStyle = {
-  backgroundImage: `url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTVweCIgaGVpZ2h0PSIxNnB4IiB2aWV3Qm94PSIwIDAgMTUgMTYiIHZlcnNpb249IjEuMSI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDUyLjIgKDY3MTQ1KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5waG9uZTwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxnIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJwaG9uZSIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJub256ZXJvIj4KICAgICAgICAgICAgPHBhdGggZD0iTTMsMSBMMyw1LjAwMDEgTDMsNi4wMDAyIEw2LjM0MzQsNi41MzEzNSBMNi4zMjc4LDE0LjU3ODE1IEw1LDE0Ljk5OTk4IEM1LjAwNiwxNS41OTI3NiA1LjQzOTMxLDE2LjAxMTM4IDYsMTUuOTk5OTggTDE0LDE1Ljk5OTk4IEMxNC41Nzg5NiwxNi4wMDE5OCAxNC45ODE3NywxNS41NzI5IDE1LDE0Ljk5OTk4IEwxNSwwLjk5OTk4IEMxNC45ODk4LDAuNDY1MjEgMTQuNTE4MjMsMC4wMDI1OSAxNCwtMmUtMDUgTDQsLTJlLTA1IEMzLjQ2NzAzLDAuMDA3OTggMy4wMDI4NCwwLjQ1Njc1IDMsMC45OTk5OCBMMywxIFogTTMuOTk5OTUsMSBMMTQsMSBMMTQsMTUgTDYsMTUgTDYuNzE4NDUsMTQuNTc4MjEgTDYuODEyMTUsNi4xNTY0MSBMMy45OTk5NSw2LjAwMDMxIEwzLjk5OTk1LDUuMDAwMzggTDMuOTk5OTUsMSBaIiBpZD0icGF0aDM4MiIvPgogICAgICAgICAgICA8cGF0aCBkPSJNMCw2IEwwLDE1IEMwLjAwNiwxNS41OTI3OCAwLjQzOTMxLDE2LjAxMTQgMSwxNiBMNiwxNiBDNi41Nzg5NiwxNi4wMDIgNi45ODE3NywxNS41NzI5MiA3LDE1IEw3LDYgQzYuOTg5OCw1LjQ2NTIzIDYuNTE4MjMsNS4wMDI2MSA2LDUgTDEsNSBDMC40NjcwMyw1LjAwOCAwLjAwMjg0LDUuNDU2NzcgMCw2IFogTTEsNy4wMDAyIEw2LDcuMDAwMiBMNiwxNC4wMDAyIEwxLDE0LjAwMDIgTDEsNy4wMDAyIFoiIGlkPSJwYXRoMzg0Ii8+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=)`,
-  backgroundSize: `14px 14px`
-};
-
 interface IToolbarProps {
   canGoBack: boolean;
   canGoForward: boolean;
@@ -58,38 +36,63 @@ class Toolbar extends React.Component<IToolbarProps, any> {
     return (
       <div className="toolbar">
         <div className="inner">
-          <button
-            className={`inspect ` + (this.props.isInspectEnabled ? `active` : ``)}
-            style={iconInspectStyle}
-            onClick={this.handleInspect}
-          >
-            Inspect
+          <button className={`inspect ` + (this.props.isInspectEnabled ? `active` : ``)} onClick={this.handleInspect}>
+            <svg viewBox="0 0 160 160">
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="inspect" transform="translate(-24.000000, -24.000000)">
+                  <polygon id="path346" opacity="0.5" points="0 0 196 0 196 196 0 196" />
+                  <path
+                    id="path348"
+                    fill="currentColor"
+                    fill-rule="nonzero"
+                    d="M73.5,171.5 L42.875,171.5 C30.625,171.5 24.5,165.375 24.5,153.125 L24.5,42.875 C24.5,30.625 30.625,24.5 42.875,24.5 L153.125,24.5 C171.5,24.5 171.5,42.48055 171.5,42.875 L171.5,73.5 L159.25,73.5 L159.25,36.75 L36.75,36.75 L36.75,159.25 L73.5,159.25 L73.5,171.5 Z M183.75,110.25 L147,134.75 L183.75,171.5 L171.5,183.75 L134.75,147 L110.25,183.75 L85.75,85.75 L183.75,110.25 Z"
+                  />
+                </g>
+              </g>
+            </svg>
           </button>
           <button
             className={`device ` + (this.props.isDeviceEmulationEnabled ? `active` : ``)}
-            style={iconDeviceStyle}
             onClick={this.handleEmulateDevice}
           >
-            Emulate device
+            <svg viewBox="0 0 15 16">
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="phone" fill="currentColor" fill-rule="nonzero">
+                  <path
+                    id="path382"
+                    d="M3,1 L3,5.0001 L3,6.0002 L6.3434,6.53135 L6.3278,14.57815 L5,14.99998 C5.006,15.59276 5.43931,16.01138 6,15.99998 L14,15.99998 C14.57896,16.00198 14.98177,15.5729 15,14.99998 L15,0.99998 C14.9898,0.46521 14.51823,0.00259 14,-2e-05 L4,-2e-05 C3.46703,0.00798 3.00284,0.45675 3,0.99998 L3,1 Z M3.99995,1 L14,1 L14,15 L6,15 L6.71845,14.57821 L6.81215,6.15641 L3.99995,6.00031 L3.99995,5.00038 L3.99995,1 Z"
+                  />
+                  <path
+                    id="path384"
+                    d="M0,6 L0,15 C0.006,15.59278 0.43931,16.0114 1,16 L6,16 C6.57896,16.002 6.98177,15.57292 7,15 L7,6 C6.9898,5.46523 6.51823,5.00261 6,5 L1,5 C0.46703,5.008 0.00284,5.45677 0,6 Z M1,7.0002 L6,7.0002 L6,14.0002 L1,14.0002 L1,7.0002 Z"
+                  />
+                </g>
+              </g>
+            </svg>
           </button>
-          <button
-            className="backward"
-            style={iconBackwardStyle}
-            onClick={this.handleBack}
-            disabled={this.props.canGoBack}
-          >
-            Backward
+          <button className="backward" onClick={this.handleBack} disabled={this.props.canGoBack}>
+            <svg viewBox="0 0 512 512">
+              <path
+                fill="currentColor"
+                d="M427 234.625H167.296l119.702-119.702L256 85 85 256l171 171 29.922-29.924-118.626-119.701H427v-42.75z"
+              />
+            </svg>
           </button>
-          <button
-            className="forward"
-            style={iconForwardStyle}
-            onClick={this.handleForward}
-            disabled={this.props.canGoForward}
-          >
-            Forward
+          <button className="forward" onClick={this.handleForward} disabled={this.props.canGoForward}>
+            <svg viewBox="0 0 512 512">
+              <path
+                fill="currentColor"
+                d="M85 277.375h259.704L225.002 397.077 256 427l171-171L256 85l-29.922 29.924 118.626 119.701H85v42.75z"
+              />
+            </svg>
           </button>
-          <button className="refresh" style={iconRefreshStyle} onClick={this.handleRefresh}>
-            Refresh
+          <button className="refresh" onClick={this.handleRefresh}>
+            <svg viewBox="0 0 512 512">
+              <path
+                fill="currentColor"
+                d="M256 388c-72.597 0-132-59.405-132-132 0-72.601 59.403-132 132-132 36.3 0 69.299 15.4 92.406 39.601L278 234h154V80l-51.698 51.702C348.406 99.798 304.406 80 256 80c-96.797 0-176 79.203-176 176s78.094 176 176 176c81.045 0 148.287-54.134 169.401-128H378.85c-18.745 49.561-67.138 84-122.85 84z"
+              />
+            </svg>
           </button>
           <UrlInput
             url={this.props.url}

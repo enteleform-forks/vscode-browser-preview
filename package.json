@@ -295,5 +295,10 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
+  },
+  "__metadata": {
+    "id": "126e4983-78cb-433f-a67c-9b07c39c7802",
+    "publisherDisplayName": "Kenneth Auchenberg",
+    "publisherId": "4b97e0f7-fbc1-4950-ae0c-e1b15d369b45"
   }
 }

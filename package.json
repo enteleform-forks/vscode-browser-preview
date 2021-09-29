@@ -19,8 +19,9 @@
     "workspace"
   ],
   "license": "MIT",
-  "version": "0.7.1",
+  "version": "9000.7.1",
   "main": "./build/ext-src/extension.js",
+  "_DISABLED_version": "0.7.1",
   "activationEvents": [
     "onView:targetTree",
     "onCommand:browser-preview.openPreview",
@@ -297,7 +298,8 @@
     }
   },
   "__metadata": {
-    "id": "126e4983-78cb-433f-a67c-9b07c39c7802",
+    "id": "00000000-0000-0000-0000-000000000000",
+    "_DISABLED_id": "126e4983-78cb-433f-a67c-9b07c39c7802",
     "publisherDisplayName": "Kenneth Auchenberg",
     "publisherId": "4b97e0f7-fbc1-4950-ae0c-e1b15d369b45"
   }
